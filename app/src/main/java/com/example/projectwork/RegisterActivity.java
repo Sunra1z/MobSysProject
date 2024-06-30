@@ -5,12 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projectwork.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,11 +30,13 @@ public class RegisterActivity extends AppCompatActivity {
     EditText emailRegister;
     EditText password;
     EditText name;
+    Spinner spinnerCountries;
     Button register;
     TextView login;
     FirebaseAuth auth;
     FirebaseFirestore db;
     ProgressBar progressBar;
+    String selectedCountry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         emailRegister = findViewById(R.id.emailRegister);
         password = findViewById(R.id.password);
         name = findViewById(R.id.name);
+        spinnerCountries = findViewById(R.id.spinner_countries);
         register = findViewById(R.id.register);
         login = findViewById(R.id.login);
         progressBar = findViewById(R.id.progressBar);
@@ -51,13 +58,30 @@ public class RegisterActivity extends AppCompatActivity {
             finish();
         });
 
+        // Настройка Spinner
+        String[] countries = {"USA", "Canada", "Mexico", "Germany", "France", "Italy", "Spain"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, countries);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCountries.setAdapter(adapter);
+
+        spinnerCountries.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedCountry = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                selectedCountry = null;
+            }
+        });
 
         register.setOnClickListener(v -> {
             String emailText = emailRegister.getText().toString();
             String passwordText = password.getText().toString();
             String nameText = name.getText().toString();
-            if (emailText.isEmpty() || passwordText.isEmpty() || nameText.isEmpty()) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Name, email and password are required", Toast.LENGTH_SHORT);
+            if (emailText.isEmpty() || passwordText.isEmpty() || nameText.isEmpty() || selectedCountry == null) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Name, email, password and country are required", Toast.LENGTH_SHORT);
                 toast.show();
                 return;
             }
@@ -69,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Map<String, Object> data = new HashMap<>();
                             data.put("name", nameText);
                             data.put("email", emailText);
-                            data.put("password", passwordText);
+                            data.put("country", selectedCountry);
                             db.collection("users")
                                     .document(user.getUid())
                                     .set(data)
@@ -91,14 +115,5 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
         });
-
-
-
-
-
-
-
-
-
     }
 }
