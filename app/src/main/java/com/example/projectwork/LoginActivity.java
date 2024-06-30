@@ -3,6 +3,7 @@ package com.example.projectwork;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,9 +11,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projectwork.GreetingScreen.OnBoardingScreen.OnboardingActivity;
+import com.example.projectwork.MainActivity;
+import com.example.projectwork.R;
+import com.example.projectwork.RegisterActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
+
+    public static final String PREFS_NAME = "MyPrefsFile";
+    public static final String FIRST_TIME_KEY = "first_time";
 
     EditText email;
     EditText password;
@@ -25,6 +33,21 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Проверяем, запускалось ли приложение ранее
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean firstTime = preferences.getBoolean(FIRST_TIME_KEY, true);
+
+        if (firstTime) {
+            // Обновляем значение, чтобы не показывать экраны приветствия в следующий раз
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean(FIRST_TIME_KEY, false);
+            editor.apply();
+
+            startActivity(new Intent(this, OnboardingActivity.class));
+            finish();
+            return; // Завершаем выполнение метода, чтобы предотвратить дальнейшее выполнение кода
+        }
         setContentView(R.layout.activity_login);
 
         email = findViewById(R.id.email);
@@ -68,8 +91,6 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
     }
-
-
 
     private void displayError(String message) {
         errorTextView.setText(message);
