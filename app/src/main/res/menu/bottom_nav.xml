@@ -1,0 +1,17 @@
+<!-- res/menu/bottom_nav.xml -->
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home" />
+    <item
+        android:id="@+id/test1"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Test1" />
+    <item
+        android:id="@+id/test2"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Test2" />
+</menu>

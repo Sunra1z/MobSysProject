@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "307613986688",
+    "project_id": "mobsysproject",
+    "storage_bucket": "mobsysproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307613986688:android:39373e534f52ee24e11b65",
+        "android_client_info": {
+          "package_name": "com.example.projectwork"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDp5VWeiC5QOYsnj2E3dCSvUqM2lqWWmi0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
