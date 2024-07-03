@@ -7,6 +7,10 @@ android {
     namespace = "com.example.projectwork"
     compileSdk = 34
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         applicationId = "com.example.projectwork"
         minSdk = 30
@@ -15,6 +19,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+
+
     }
 
     buildTypes {
@@ -57,5 +64,8 @@ dependencies {
 
     //material design
     implementation("com.google.android.material:material:1.7.0")
+
+    // news Api
+    implementation ("com.github.KwabenBerko:News-API-Java:1.0.2")
 
 }

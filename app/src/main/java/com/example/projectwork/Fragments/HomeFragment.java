@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projectwork.Adapters.homeFragmentRecyclerAdapter;
 import com.example.projectwork.DataClasses.WasteDisposalItem;
 import com.example.projectwork.R;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+        ShapeableImageView newsButton = view.findViewById(R.id.imageView6);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         List<WasteDisposalItem> items = new ArrayList<>();
@@ -38,6 +40,18 @@ public class HomeFragment extends Fragment {
 
         homeFragmentRecyclerAdapter adapter = new homeFragmentRecyclerAdapter(items);
         recyclerView.setAdapter(adapter);
+
+        newsButton.setOnClickListener(v -> {
+            // New instance for News Fragment
+            NewsFragment newsFragment = new NewsFragment();
+
+            // Using FragmentTransaction to replace fragment
+            // not null safe but meh, it works :)
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainerView, newsFragment)
+                    .addToBackStack(null) // back stack
+                    .commit();
+        });
 
         return view;
     }
