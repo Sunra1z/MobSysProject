@@ -8,6 +8,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.projectwork.Fragments.HomeFragment;
+import com.example.projectwork.Fragments.ProfileFragment;
 import com.example.projectwork.Fragments.Test1Fragment;
 import com.example.projectwork.Fragments.Test2Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -47,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.test2:
                     fragment = new Test2Fragment();
+                    break;
+                case R.id.profile:
+                    fragment = new ProfileFragment();
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
