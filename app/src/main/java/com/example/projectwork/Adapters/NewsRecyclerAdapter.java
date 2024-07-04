@@ -41,7 +41,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
         Article article = articleList.get(position);
         holder.titleTextView.setText(article.getTitle());
-        holder.sourceTextView.setText(article.getSource().getName());
+        holder.descriptionTextView.setText(article.getDescription());
         Picasso.get().load(article.getUrlToImage())
                 .error(R.drawable.baseline_image_not_supported_24)
                 .into(holder.imageView);
@@ -55,13 +55,13 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
     class NewsViewHolder extends RecyclerView.ViewHolder{
 
-        TextView titleTextView, sourceTextView;
+        TextView titleTextView, descriptionTextView;
         ImageView imageView;
 
         public NewsViewHolder(@NonNull View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.article_title_text_view);
-            sourceTextView = itemView.findViewById(R.id.article_source_text_view);
+            descriptionTextView = itemView.findViewById(R.id.article_description_text_view);
             imageView = itemView.findViewById(R.id.article_image_view);
 
 
