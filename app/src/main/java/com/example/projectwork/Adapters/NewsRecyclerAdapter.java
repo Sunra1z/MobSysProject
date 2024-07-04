@@ -1,5 +1,6 @@
 package com.example.projectwork.Adapters;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,8 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectwork.Fragments.NewsDetailFragment;
 import com.example.projectwork.R;
 import com.kwabenaberko.newsapilib.models.Article;
 import com.squareup.picasso.Picasso;
@@ -19,7 +23,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
     public List<Article> articleList;
 
-    // мега костыль нахуй, позже наверное исправлю
+    // at least it works
     public NewsRecyclerAdapter(List<Article> articleList){
         this.articleList = articleList;
     }
@@ -64,6 +68,26 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
             descriptionTextView = itemView.findViewById(R.id.article_description_text_view);
             imageView = itemView.findViewById(R.id.article_image_view);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getBindingAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION){
+                        Article article = articleList.get(position);
+
+                        NewsDetailFragment newsDetailFragment = new NewsDetailFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("url", article.getUrl());
+                        newsDetailFragment.setArguments(bundle);
+
+                        FragmentManager fragmentManager = ((AppCompatActivity)v.getContext()).getSupportFragmentManager();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.fragmentContainerView, newsDetailFragment)
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                }
+            });
 
         }
     }

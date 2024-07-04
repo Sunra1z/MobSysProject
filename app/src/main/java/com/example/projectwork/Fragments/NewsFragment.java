@@ -42,6 +42,7 @@ public class NewsFragment extends Fragment {
         setRecyclerView();
         getNews();
 
+
         return view;
     }
 
@@ -71,13 +72,13 @@ public class NewsFragment extends Fragment {
                 new NewsApiClient.ArticlesResponseCallback() {
                     @Override
                     public void onSuccess(ArticleResponse response) {
-                        Log.i("Got response",response.toString());
+                        Log.i("NEWS API",response.toString());
 
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 changeInProgress(false);
-                                Log.i("Debugging","Ya togo rot ebal");
+                                Log.i("NEWS API","News Loaded");
                                 articleList = response.getArticles();
                                 adapter.updateData(articleList);
                                 adapter.notifyDataSetChanged();
@@ -87,7 +88,7 @@ public class NewsFragment extends Fragment {
 
                     @Override
                     public void onFailure(Throwable throwable) {
-                        Log.i("Got failure", throwable.getMessage());
+                        Log.i("NEWS API", throwable.getMessage());
                         changeInProgress(false);
                     }
                 }
