@@ -68,4 +68,7 @@ dependencies {
     // news Api
     implementation ("com.github.KwabenBerko:News-API-Java:1.0.2")
 
+    // Passing images to imageView using URL's
+    implementation ("com.squareup.picasso:picasso:2.8")
+
 }
