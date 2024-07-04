@@ -16,6 +16,8 @@ public class NewsDetailFragment extends Fragment {
 
     private String url;
 
+
+    // getting url through NewsAdapter using Bundle
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
