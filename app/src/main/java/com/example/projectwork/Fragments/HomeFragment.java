@@ -38,7 +38,24 @@ public class HomeFragment extends Fragment {
         items.add(new WasteDisposalItem(R.drawable.img_4, "Glass"));
 
 
-        homeFragmentRecyclerAdapter adapter = new homeFragmentRecyclerAdapter(items);
+        homeFragmentRecyclerAdapter adapter = new homeFragmentRecyclerAdapter(items, new homeFragmentRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void OnItemClick(WasteDisposalItem item) {
+                Fragment selectedFragment = null;
+                switch (item.getTitle()){
+//                    case "Paper": selectedFragment = new PaperFragment();
+//                    case "Metal": selectedFragment = new MetalFragment();
+                    case "Plastic": selectedFragment = new PlasticFragment();
+//                    case "Glass": selectedFragment = new GlassFragment();
+                }
+                if (selectedFragment != null){
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragmentContainerView, selectedFragment)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            }
+        });
         recyclerView.setAdapter(adapter);
 
         newsButton.setOnClickListener(v -> {
