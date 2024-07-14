@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/profile_pic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
@@ -17,7 +17,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"
         tools:src="@drawable/ic_launcher_background" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="140dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtName"
@@ -32,7 +46,8 @@
         app:layout_constraintBottom_toTopOf="@+id/txtemail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@+id/profile_pic" />
 
     <TextView
         android:id="@+id/txtemail"
@@ -44,6 +59,7 @@
         android:text="test@gmail.com"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
     <ImageView
@@ -75,6 +91,7 @@
         android:layout_marginTop="58dp"
         android:layout_marginEnd="160dp"
         android:text="Button"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtemail" />
@@ -87,6 +104,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="177dp"
         android:text="TextView"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtemail" />

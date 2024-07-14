@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,9 @@ public class ProfileFragment extends Fragment {
     Button logout;
     FirebaseAuth auth;
     TextView txtName, txtEmail, txtCountry;
+    ImageView imgProfile;
+
+    ProgressBar progressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,8 @@ public class ProfileFragment extends Fragment {
         txtName = view.findViewById(R.id.txtName);
         txtEmail = view.findViewById(R.id.txtemail);
         txtCountry = view.findViewById(R.id.txtCountry);
+        progressBar = view.findViewById(R.id.progressBar);
+        imgProfile = view.findViewById(R.id.profile_pic);
 
         //logout button
         logout.setOnClickListener(v -> {
@@ -52,6 +59,10 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        // Showing the progress bar to avoid showing unloaded data
+        progressBar.setVisibility(View.VISIBLE);
+
         // Get user data
         db.collection("users").document(auth.getCurrentUser().getUid()).get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
@@ -64,11 +75,22 @@ public class ProfileFragment extends Fragment {
                 txtEmail.setText("");
                 txtCountry.setText("");
             }
+            // when user found loading animation is gone
+            // showing user data
+            progressBar.setVisibility(View.GONE);
+            imgProfile.setVisibility(View.VISIBLE);
+            txtName.setVisibility(View.VISIBLE);
+            txtEmail.setVisibility(View.VISIBLE);
+            txtCountry.setVisibility(View.VISIBLE);
+            logout.setVisibility(View.VISIBLE);
+
+
         }).addOnFailureListener(e -> {
             // Handle the error
             txtName.setText("");
             txtEmail.setText("");
             txtCountry.setText("");
+            progressBar.setVisibility(View.GONE);
         });
     }
 }
