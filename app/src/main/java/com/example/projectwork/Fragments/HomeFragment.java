@@ -40,13 +40,16 @@ public class HomeFragment extends Fragment {
 
         homeFragmentRecyclerAdapter adapter = new homeFragmentRecyclerAdapter(items, new homeFragmentRecyclerAdapter.OnItemClickListener() {
             @Override
-            public void OnItemClick(WasteDisposalItem item) {
+            public void OnItemClick(WasteDisposalItem item) { // This is bullshit but it works
                 Fragment selectedFragment = null;
-                switch (item.getTitle()){
-//                    case "Paper": selectedFragment = new PaperFragment();
-//                    case "Metal": selectedFragment = new MetalFragment();
-                    case "Plastic": selectedFragment = new PlasticFragment();
-//                    case "Glass": selectedFragment = new GlassFragment();
+                if (item.getTitle().equals("Plastic")){
+                    selectedFragment = new PlasticFragment();
+                } else if (item.getTitle().equals("Glass")) {
+                    selectedFragment = new GlassFragment();
+                } else if (item.getTitle().equals("Paper")){
+                    selectedFragment = new PaperFragment();
+                } else if (item.getTitle().equals("Metal")) {
+                    selectedFragment = new MetalFragment();
                 }
                 if (selectedFragment != null){
                     getActivity().getSupportFragmentManager().beginTransaction()

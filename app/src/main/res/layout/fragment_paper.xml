@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.PlasticFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Paper"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="25dp"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/black"
+        android:id="@+id/news_title_textview"/>
+
+    <TextView
+        android:id="@+id/textView_plasticWhat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        android:fontFamily="sans-serif-black"
+        android:text="What to dispose?"
+        android:textColor="@color/black"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/textView_plastic"
+        android:layout_below="@id/textView_plasticWhat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/paper_what"
+        android:fontFamily="sans-serif"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"/>
+    <TextView
+        android:id="@+id/textView_plasticHow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_plastic"
+        android:text="How to dispose?"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/black"
+        android:textSize="30dp"/>
+    <TextView
+        android:id="@+id/textView_plasticGuide"
+        android:layout_below="@id/textView_plasticHow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/paper_guidance"
+        android:fontFamily="sans-serif"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_plasticGuide"
+        android:layout_marginStart="145dp"
+        android:layout_marginTop="-241dp"
+        android:layout_marginBottom="-74dp"
+        android:scaleType="fitEnd"
+        android:src="@drawable/paper" />
+
+
+</RelativeLayout>
