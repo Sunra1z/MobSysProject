@@ -2,4 +2,13 @@
     <string name="app_name">ProjectWork</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="plastic_what">Plastic bottles, containers, plastic decorations, plastic toys</string>
+    <string name="plastic_guidance"> Don\'t recycle contaminated plastics: Avoid putting greasy or food-coated plastics in the recycling bin, as this can contaminate the entire batch.
+Separate recyclables from trash: Check your local guidelines for proper sorting of recyclables and trash.</string>
+    <string name="glass_what">Glass bottles, jars, containers, and other stuff made of glass</string>
+    <string name="glass_guidance">Look for bottle banks which are designated bins for glass recycling.\nThese bins are often separated by color for clear, green, and brown glass.  Sometimes blue glass also goes in the green bin.  Be sure to remove the lids before tossing the container in the bin. Lids can be recycled separately depending on the material.</string>
+    <string name="metal_what">Aluminum cans, tin cans, metal lids,\nfoil, small metal household items.</string>
+    <string name="metal_guidance">Recycle: Rinse to remove food\nresidue, flatten cans if possible\nto save space.\n\nReuse: Use metal containers\nfor storage, and repurpose\nsmall metal items in DIY\nprojects.</string>
+    <string name="paper_what">Newspapers, magazines, office paper,\n cardboard, paper packaging,\n books (without plastic covers),\nenvelopes (without plastic windows.).</string>
+    <string name="paper_guidance">Recycle: Ensure paper is free\nfrom food residue or plastic\ncoatings. Tear large pieces into\nsmaller sections for easier\nprocessing.\n\nReuse: Use both sides of paper\nbefore recycling, repurpose old\nnewspapers for cleaning\nwindows or packing fragile\nitems.</string>
 </resources>

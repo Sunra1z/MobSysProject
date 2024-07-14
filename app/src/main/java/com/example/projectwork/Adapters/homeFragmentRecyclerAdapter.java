@@ -16,10 +16,16 @@ import java.util.List;
 
 public class homeFragmentRecyclerAdapter extends RecyclerView.Adapter<homeFragmentRecyclerAdapter.ViewHolder> {
 
-    private List<WasteDisposalItem> itemList;
+    public interface OnItemClickListener {
+        void OnItemClick(WasteDisposalItem item);
+    }
 
-    public homeFragmentRecyclerAdapter(List<WasteDisposalItem> itemList) {
+    private List<WasteDisposalItem> itemList;
+    private OnItemClickListener listener;
+
+    public homeFragmentRecyclerAdapter(List<WasteDisposalItem> itemList, OnItemClickListener listener) {
         this.itemList = itemList;
+        this.listener = listener;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -49,6 +55,13 @@ public class homeFragmentRecyclerAdapter extends RecyclerView.Adapter<homeFragme
         WasteDisposalItem item = itemList.get(position);
         holder.itemImage.setImageResource(item.getImageResId());
         holder.itemText.setText(item.getTitle());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.OnItemClick(item);
+            }
+        });
     }
 
     @Override
