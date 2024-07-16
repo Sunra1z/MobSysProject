@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.projectwork.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -69,6 +70,13 @@ public class ProfileFragment extends Fragment {
                 txtName.setText(documentSnapshot.getString("name"));
                 txtEmail.setText(documentSnapshot.getString("email"));
                 txtCountry.setText(documentSnapshot.getString("country"));
+                String profilePicUrl = documentSnapshot.getString("profilePic");
+
+                // setting IMG profile from FireBase URL using Glide library
+                Glide.with(this)
+                        .load(profilePicUrl)
+                        .circleCrop()
+                        .into(imgProfile);
             } else {
                 // Handle the case where the document does not exist
                 txtName.setText("");

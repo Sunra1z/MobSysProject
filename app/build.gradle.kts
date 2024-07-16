@@ -56,6 +56,7 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore:25.0.0")
     implementation("androidx.activity:activity:1.8.0")
     implementation("com.android.car.ui:car-ui-lib:2.6.0")
+    implementation("com.google.firebase:firebase-storage-ktx:21.0.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -70,5 +71,11 @@ dependencies {
 
     // Passing images to imageView using URL's
     implementation ("com.squareup.picasso:picasso:2.8")
+
+    // using external image picker (ANDROID 12 OR LOWER)
+    implementation ("com.github.dhaval2404:imagepicker:2.1")
+
+    // image set library
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 
 }

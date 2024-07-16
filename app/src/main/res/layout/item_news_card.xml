@@ -16,10 +16,12 @@
         android:orientation="horizontal"
         android:padding="4dp">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/article_image_view"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:src="@drawable/baseline_image_not_supported_24"
+            app:shapeAppearanceOverlay="@style/RoundedCorners"
             android:scaleType="centerCrop" />
 
         <LinearLayout
