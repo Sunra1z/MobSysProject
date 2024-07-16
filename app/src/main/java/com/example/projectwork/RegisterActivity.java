@@ -1,20 +1,31 @@
 package com.example.projectwork;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projectwork.DataClasses.UtilClass;
 import com.example.projectwork.R;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,11 +36,18 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
+
 public class RegisterActivity extends AppCompatActivity {
+
+    ActivityResultLauncher<Intent> imagePickLauncher;
+
 
     EditText emailRegister;
     EditText password;
     EditText name;
+    ImageView imageChooser;
     Spinner spinnerCountries;
     Button register;
     TextView login;
@@ -37,6 +55,8 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseFirestore db;
     ProgressBar progressBar;
     String selectedCountry;
+
+    Uri selectedImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +70,8 @@ public class RegisterActivity extends AppCompatActivity {
         register = findViewById(R.id.register);
         login = findViewById(R.id.login);
         progressBar = findViewById(R.id.progressBar);
+        imageChooser = findViewById(R.id.profile_pic_add);
+
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -57,6 +79,17 @@ public class RegisterActivity extends AppCompatActivity {
         login.setOnClickListener(v -> {
             finish();
         });
+
+        imagePickLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if(result.getResultCode() == Activity.RESULT_OK){
+                        Intent data = result.getData();
+                        if(data != null && data.getData()!=null){
+                            selectedImageUri = data.getData();
+                            UtilClass.setProfilePic(getBaseContext(), selectedImageUri, imageChooser);
+                        }
+                    }
+                });
 
         // Настройка Spinner
         String[] countries = {"USA", "Canada", "Mexico", "Germany", "France", "Italy", "Spain"};
@@ -76,6 +109,18 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        imageChooser.setOnClickListener(v -> {
+            ImagePicker.with(this).cropSquare().compress(512).maxResultSize(512,512)
+                    .createIntent(new Function1<Intent, Unit>() {
+                        @Override
+                        public Unit invoke(Intent intent) {
+                            imagePickLauncher.launch(intent);
+                            return null;
+                        }
+                    });
+        });
+
+
         register.setOnClickListener(v -> {
             String emailText = emailRegister.getText().toString();
             String passwordText = password.getText().toString();
@@ -94,26 +139,33 @@ public class RegisterActivity extends AppCompatActivity {
                             data.put("name", nameText);
                             data.put("email", emailText);
                             data.put("country", selectedCountry);
-                            db.collection("users")
-                                    .document(user.getUid())
-                                    .set(data)
+                            UtilClass.uploadProfilePic(selectedImageUri, user.getUid())
                                     .addOnCompleteListener(task1 -> {
-                                        progressBar.setVisibility(View.GONE);
                                         if (task1.isSuccessful()) {
-                                            Toast toast = Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_SHORT);
-                                            toast.show();
-                                            finish();
+                                            Uri downloadUri = task1.getResult();
+                                            data.put("profilePic", downloadUri.toString());
+                                            db.collection("users")
+                                                    .document(user.getUid())
+                                                    .set(data)
+                                                    .addOnCompleteListener(task2 -> {
+                                                        progressBar.setVisibility(View.GONE);
+                                                        if (task2.isSuccessful()) {
+                                                            Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_SHORT).show();
+                                                            finish();
+                                                        } else {
+                                                            Toast.makeText(getApplicationContext(), "Failed to register user", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
                                         } else {
-                                            Toast toast = Toast.makeText(getApplicationContext(), "Failed to register user", Toast.LENGTH_SHORT);
-                                            toast.show();
+                                            progressBar.setVisibility(View.GONE);
+                                            Toast.makeText(getApplicationContext(), "Failed to upload picture", Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         } else {
                             progressBar.setVisibility(View.GONE);
-                            Toast toast = Toast.makeText(getApplicationContext(), "Failed to register user", Toast.LENGTH_SHORT);
-                            toast.show();
+                            Toast.makeText(getApplicationContext(), "Failed to register user", Toast.LENGTH_SHORT).show();
                         }
                     });
-        });
+            });
     }
 }

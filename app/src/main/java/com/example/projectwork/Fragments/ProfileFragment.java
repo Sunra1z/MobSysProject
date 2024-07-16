@@ -5,12 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.projectwork.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -21,6 +24,9 @@ public class ProfileFragment extends Fragment {
     Button logout;
     FirebaseAuth auth;
     TextView txtName, txtEmail, txtCountry;
+    ImageView imgProfile;
+
+    ProgressBar progressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,8 @@ public class ProfileFragment extends Fragment {
         txtName = view.findViewById(R.id.txtName);
         txtEmail = view.findViewById(R.id.txtemail);
         txtCountry = view.findViewById(R.id.txtCountry);
+        progressBar = view.findViewById(R.id.progressBar);
+        imgProfile = view.findViewById(R.id.profile_pic);
 
         //logout button
         logout.setOnClickListener(v -> {
@@ -52,23 +60,45 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        // Showing the progress bar to avoid showing unloaded data
+        progressBar.setVisibility(View.VISIBLE);
+
         // Get user data
         db.collection("users").document(auth.getCurrentUser().getUid()).get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
                 txtName.setText(documentSnapshot.getString("name"));
                 txtEmail.setText(documentSnapshot.getString("email"));
                 txtCountry.setText(documentSnapshot.getString("country"));
+                String profilePicUrl = documentSnapshot.getString("profilePic");
+
+                // setting IMG profile from FireBase URL using Glide library
+                Glide.with(this)
+                        .load(profilePicUrl)
+                        .circleCrop()
+                        .into(imgProfile);
             } else {
                 // Handle the case where the document does not exist
                 txtName.setText("");
                 txtEmail.setText("");
                 txtCountry.setText("");
             }
+            // when user found loading animation is gone
+            // showing user data
+            progressBar.setVisibility(View.GONE);
+            imgProfile.setVisibility(View.VISIBLE);
+            txtName.setVisibility(View.VISIBLE);
+            txtEmail.setVisibility(View.VISIBLE);
+            txtCountry.setVisibility(View.VISIBLE);
+            logout.setVisibility(View.VISIBLE);
+
+
         }).addOnFailureListener(e -> {
             // Handle the error
             txtName.setText("");
             txtEmail.setText("");
             txtCountry.setText("");
+            progressBar.setVisibility(View.GONE);
         });
     }
 }

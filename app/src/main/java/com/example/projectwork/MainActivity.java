@@ -1,21 +1,16 @@
 package com.example.projectwork;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.example.projectwork.Fragments.HomeFragment;
 import com.example.projectwork.Fragments.ProfileFragment;
-import com.example.projectwork.Fragments.Test1Fragment;
-import com.example.projectwork.Fragments.Test2Fragment;
+import com.example.projectwork.Fragments.ShopFragment;
+import com.example.projectwork.Fragments.TasksFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.home:
                     fragment = new HomeFragment();
                     break;
-                case R.id.test1:
-                    fragment = new Test1Fragment();
+                case R.id.tasks:
+                    fragment = new TasksFragment();
                     break;
-                case R.id.test2:
-                    fragment = new Test2Fragment();
+                case R.id.shop:
+                    fragment = new ShopFragment();
                     break;
                 case R.id.profile:
                     fragment = new ProfileFragment();
