@@ -1,5 +1,6 @@
 package com.example.projectwork.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ProfileFragment extends Fragment {
-
     FirebaseFirestore db;
     Button logout;
     FirebaseAuth auth;
@@ -72,11 +72,13 @@ public class ProfileFragment extends Fragment {
                 txtCountry.setText(documentSnapshot.getString("country"));
                 String profilePicUrl = documentSnapshot.getString("profilePic");
 
-                // setting IMG profile from FireBase URL using Glide library
-                Glide.with(this)
-                        .load(profilePicUrl)
-                        .circleCrop()
-                        .into(imgProfile);
+                if (isAdded()){
+                    // setting IMG profile from FireBase URL using Glide library
+                    Glide.with(this)
+                            .load(profilePicUrl)
+                            .circleCrop()
+                            .into(imgProfile);
+                }
             } else {
                 // Handle the case where the document does not exist
                 txtName.setText("");
