@@ -8,6 +8,6 @@
         android:dashGap="10px"
         android:width="2dp"/>
     <corners
-        android:radius="30dp"/>
+        android:radius="25dp"/>
 
 </shape>
