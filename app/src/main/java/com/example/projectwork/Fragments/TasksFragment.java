@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +37,8 @@ public class TasksFragment extends Fragment {
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
 
+    ProgressBar progressBar;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,14 +46,12 @@ public class TasksFragment extends Fragment {
 
         createTask = view.findViewById(R.id.upload_task_button);
         recyclerView = view.findViewById(R.id.tasks_recyclerView);
+        progressBar = view.findViewById(R.id.progress_bar_tasks);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setView(R.layout.progress_layout);
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        recyclerView.setVisibility(View.INVISIBLE);
 
         tasksList = new ArrayList<>();
 
@@ -58,7 +59,7 @@ public class TasksFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Tasks");
-        dialog.show();
+
 
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -69,12 +70,15 @@ public class TasksFragment extends Fragment {
                     tasksList.add(taskDataClass);
                 }
                 adapter.notifyDataSetChanged();
-                dialog.dismiss();
+
+                recyclerView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                dialog.dismiss();
+                recyclerView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
             }
         });
 

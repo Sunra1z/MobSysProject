@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.ProfileFragment">
 
+    <include layout="@layout/header"/>
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profile_pic"
@@ -15,11 +16,12 @@
         android:layout_marginTop="85dp"
         android:layout_marginEnd="140dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/salad"
         app:shapeAppearanceOverlay="@style/circleImageView"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_launcher_background" />
+        tools:src="@drawable/baseline_account_circle_24" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -63,26 +65,6 @@
         android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/baseline_notifications_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/baseline_menu_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/logout"
@@ -91,7 +73,10 @@
         android:layout_marginStart="160dp"
         android:layout_marginTop="58dp"
         android:layout_marginEnd="160dp"
-        android:text="Button"
+        android:backgroundTint="@color/white"
+        android:elevation="10dp"
+        android:background="@drawable/green_border"
+        android:text="Logout"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

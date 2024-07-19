@@ -152,7 +152,7 @@ public class TaskUploadActivity extends AppCompatActivity {
                            // Unique task id combining user id and task number
                            String taskId = userId + "_" + (taskNumber + 1);
 
-                           userTasksRef.child(taskId).setValue(taskDataClass)
+                           userTasksRef.setValue(taskDataClass)
                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
                                        @Override
                                        public void onComplete(@NonNull Task<Void> task) {
