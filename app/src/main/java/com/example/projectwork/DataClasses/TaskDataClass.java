@@ -10,6 +10,8 @@ public class TaskDataClass {
         return taskTitle;
     }
 
+    public TaskDataClass() {}
+
     public String getTaskDesc() {
         return taskDesc;
     }

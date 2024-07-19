@@ -3,6 +3,7 @@ package com.example.projectwork;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,8 +30,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -65,6 +68,8 @@ public class TaskUploadActivity extends AppCompatActivity {
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent data = result.getData();
                             uri = data.getData();
+                            uploadImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                            uploadImage.setBackgroundResource(R.drawable.green_border);
                             uploadImage.setImageURI(uri);
                         } else {
                             Toast.makeText(TaskUploadActivity.this, "No image selected", Toast.LENGTH_SHORT).show();
@@ -85,6 +90,15 @@ public class TaskUploadActivity extends AppCompatActivity {
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String title = Article.getText().toString();
+                String desc = Desc.getText().toString();
+                String price = Price.getText().toString();
+
+                if (title.isEmpty() || desc.isEmpty() || price.isEmpty() || uri == null){
+                    Toast.makeText(TaskUploadActivity.this, "Please enter all fields and images", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 saveData();
             }
         });
@@ -125,34 +139,37 @@ public class TaskUploadActivity extends AppCompatActivity {
 
         TaskDataClass taskDataClass = new TaskDataClass(title, desc, imageURL, price);
 
-        // Check if a task with the same title already exists
-        FirebaseDatabase.getInstance().getReference("Tasks").child(title)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+        // Get the upload user ID
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        // Get the number of tasks the user has already created
+        DatabaseReference userTasksRef = FirebaseDatabase.getInstance().getReference("Tasks").child(userId);
+        userTasksRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            // Task with the same title already exists
-                            Toast.makeText(TaskUploadActivity.this, "A task with the same title already exists.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Task with the same title does not exist, save the new task
-                            FirebaseDatabase.getInstance().getReference("Tasks").child(title)
-                                    .setValue(taskDataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(TaskUploadActivity.this, "Saved successfully", Toast.LENGTH_SHORT).show();
-                                                finish();
-                                            }
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(TaskUploadActivity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                        }
-                    }
+                           long taskNumber = dataSnapshot.getChildrenCount();
 
+                           // Unique task id combining user id and task number
+                           String taskId = userId + "_" + (taskNumber + 1);
+
+                           userTasksRef.child(taskId).setValue(taskDataClass)
+                                   .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                       @Override
+                                       public void onComplete(@NonNull Task<Void> task) {
+                                           if (task.isSuccessful()){
+                                               Toast.makeText(TaskUploadActivity.this, "Saved successfully", Toast.LENGTH_SHORT).show();
+                                               finish();
+                                           }
+                                       }
+                                   })
+                                   .addOnFailureListener(new OnFailureListener() {
+                                       @Override
+                                       public void onFailure(@NonNull Exception e) {
+                                           Toast.makeText(TaskUploadActivity.this, "Something went wrong, please try again", Toast.LENGTH_SHORT).show();
+                                           Log.d("DB ERROR", e.getMessage().toString());
+                                       }
+                                   });
+                    }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         // Handle error
