@@ -43,7 +43,6 @@ public class ProfileFragment extends Fragment {
 
         logout = view.findViewById(R.id.logout);
         txtName = view.findViewById(R.id.txtName);
-        txtEmail = view.findViewById(R.id.txtemail);
         txtCountry = view.findViewById(R.id.txtCountry);
         progressBar = view.findViewById(R.id.progressBar);
         imgProfile = view.findViewById(R.id.profile_pic);
@@ -68,7 +67,6 @@ public class ProfileFragment extends Fragment {
         db.collection("users").document(auth.getCurrentUser().getUid()).get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
                 txtName.setText(documentSnapshot.getString("name"));
-                txtEmail.setText(documentSnapshot.getString("email"));
                 txtCountry.setText(documentSnapshot.getString("country"));
                 String profilePicUrl = documentSnapshot.getString("profilePic");
 
@@ -82,7 +80,6 @@ public class ProfileFragment extends Fragment {
             } else {
                 // Handle the case where the document does not exist
                 txtName.setText("");
-                txtEmail.setText("");
                 txtCountry.setText("");
             }
             // when user found loading animation is gone
@@ -90,7 +87,6 @@ public class ProfileFragment extends Fragment {
             progressBar.setVisibility(View.GONE);
             imgProfile.setVisibility(View.VISIBLE);
             txtName.setVisibility(View.VISIBLE);
-            txtEmail.setVisibility(View.VISIBLE);
             txtCountry.setVisibility(View.VISIBLE);
             logout.setVisibility(View.VISIBLE);
 
@@ -98,7 +94,6 @@ public class ProfileFragment extends Fragment {
         }).addOnFailureListener(e -> {
             // Handle the error
             txtName.setText("");
-            txtEmail.setText("");
             txtCountry.setText("");
             progressBar.setVisibility(View.GONE);
         });
