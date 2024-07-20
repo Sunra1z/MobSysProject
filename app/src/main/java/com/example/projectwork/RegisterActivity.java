@@ -139,6 +139,13 @@ public class RegisterActivity extends AppCompatActivity {
                             data.put("name", nameText);
                             data.put("email", emailText);
                             data.put("country", selectedCountry);
+                            data.put("points", "0");
+
+                            if (selectedImageUri == null){
+                                selectedImageUri = Uri.parse("android.resource://com.example.projectwork/" + R.drawable.baseline_account_circle_24);
+                            }
+
+
                             UtilClass.uploadProfilePic(selectedImageUri, user.getUid())
                                     .addOnCompleteListener(task1 -> {
                                         if (task1.isSuccessful()) {

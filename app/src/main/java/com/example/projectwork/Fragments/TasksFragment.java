@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectwork.Adapters.TasksRecyclerAdapter;
@@ -48,8 +49,7 @@ public class TasksFragment extends Fragment {
         recyclerView = view.findViewById(R.id.tasks_recyclerView);
         progressBar = view.findViewById(R.id.progress_bar_tasks);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
-        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         recyclerView.setVisibility(View.INVISIBLE);
 
@@ -65,9 +65,11 @@ public class TasksFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 tasksList.clear();
-                for (DataSnapshot itemSnapshot: snapshot.getChildren()){
-                    TaskDataClass taskDataClass = itemSnapshot.getValue(TaskDataClass.class);
-                    tasksList.add(taskDataClass);
+                for (DataSnapshot userSnapshot : snapshot.getChildren()){
+                    for (DataSnapshot taskSnapshot : userSnapshot.getChildren()){
+                        TaskDataClass taskDataClass = taskSnapshot.getValue(TaskDataClass.class);
+                        tasksList.add(taskDataClass);
+                    }
                 }
                 adapter.notifyDataSetChanged();
 

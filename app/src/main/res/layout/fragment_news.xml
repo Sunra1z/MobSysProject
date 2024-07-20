@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -12,25 +12,25 @@
     <TextView
         android:id="@+id/news_title_textview"
         android:layout_width="match_parent"
+        android:layout_below="@id/include2"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
         android:text="News"
         android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@+id/include2" />
+        android:textSize="30sp" />
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:indeterminate="true"
-        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/progress_bar"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@id/news_title_textview"
         app:layout_constraintTop_toBottomOf="@id/news_title_textview"
         android:id="@+id/news_recycler_view"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

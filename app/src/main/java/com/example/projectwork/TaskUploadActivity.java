@@ -148,10 +148,9 @@ public class TaskUploadActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                            long taskNumber = dataSnapshot.getChildrenCount();
-
-                           // Unique task id combining user id and task number
-                           String taskId = userId + "_" + (taskNumber + 1);
-
+                            // Unique task id combining user id and task number
+                            String taskId = userId + "_" + (taskNumber + 1);
+                            DatabaseReference userTasksRef = FirebaseDatabase.getInstance().getReference("Tasks").child(userId).child(taskId);
                            userTasksRef.setValue(taskDataClass)
                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
                                        @Override

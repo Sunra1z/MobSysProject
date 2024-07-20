@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:backgroundTint="@color/salad"
         app:shapeAppearanceOverlay="@style/circleImageView"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/baseline_account_circle_24" />
@@ -49,21 +49,8 @@
         app:layout_constraintBottom_toTopOf="@+id/txtemail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/profile_pic" />
-
-    <TextView
-        android:id="@+id/txtemail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="155dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="155dp"
-        android:text="test@gmail.com"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
 
     <Button
@@ -77,10 +64,10 @@
         android:elevation="10dp"
         android:background="@drawable/green_border"
         android:text="Logout"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtemail" />
+        app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
     <TextView
         android:id="@+id/txtCountry"
@@ -89,11 +76,40 @@
         android:layout_marginStart="177dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="177dp"
-        android:text="TextView"
-        android:visibility="invisible"
+        android:text="country"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtemail" />
+        app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Points:"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="24sp"
+                android:fontFamily="sans-serif-medium"/>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
