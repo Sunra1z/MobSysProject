@@ -1,6 +1,7 @@
 package com.example.projectwork.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.projectwork.LoginActivity;
 import com.example.projectwork.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,7 +25,7 @@ public class ProfileFragment extends Fragment {
     FirebaseFirestore db;
     Button logout;
     FirebaseAuth auth;
-    TextView txtName, txtEmail, txtCountry;
+    TextView txtName, txtCountry, pointsProfile;
     ImageView imgProfile;
 
     ProgressBar progressBar;
@@ -46,11 +48,13 @@ public class ProfileFragment extends Fragment {
         txtCountry = view.findViewById(R.id.txtCountry);
         progressBar = view.findViewById(R.id.progressBar);
         imgProfile = view.findViewById(R.id.profile_pic);
+        pointsProfile = view.findViewById(R.id.PointsScoreProfile);
 
         //logout button
         logout.setOnClickListener(v -> {
             auth.signOut();
-            getActivity().finish();
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
         });
 
         return view;
@@ -68,6 +72,7 @@ public class ProfileFragment extends Fragment {
             if (documentSnapshot.exists()) {
                 txtName.setText(documentSnapshot.getString("name"));
                 txtCountry.setText(documentSnapshot.getString("country"));
+                pointsProfile.setText(documentSnapshot.getString("points"));
                 String profilePicUrl = documentSnapshot.getString("profilePic");
 
                 if (isAdded()){
@@ -81,6 +86,7 @@ public class ProfileFragment extends Fragment {
                 // Handle the case where the document does not exist
                 txtName.setText("");
                 txtCountry.setText("");
+                pointsProfile.setText("0");
             }
             // when user found loading animation is gone
             // showing user data
@@ -95,6 +101,7 @@ public class ProfileFragment extends Fragment {
             // Handle the error
             txtName.setText("");
             txtCountry.setText("");
+            pointsProfile.setText("");
             progressBar.setVisibility(View.GONE);
         });
     }

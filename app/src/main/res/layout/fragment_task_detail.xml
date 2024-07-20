@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.TaskDetailFragment">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/taskDetailImageView"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginEnd="46dp"
+        android:layout_width="match_parent"
+        android:scaleType="centerCrop"
+        android:elevation="10dp"
+        android:layout_height="200dp"
+        android:src="@drawable/placeholder"
+        app:shapeAppearanceOverlay="@style/RoundedCorners"/>
+    <TextView
+        android:layout_width="200dp"
+        android:id="@+id/titleTaskDetailTextView"
+        android:layout_height="wrap_content"
+        android:text="050040 Almaty"
+        android:textColor="@color/black"
+        android:layout_below="@id/taskDetailImageView"
+        android:fontFamily="sans-serif-black"
+        android:textSize="28dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="46dp"
+        android:maxLines="2"
+        android:layout_marginEnd="46dp"
+        android:textAlignment="textStart"/>
+    <Button
+        android:id="@+id/taskPriceDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/dollar_sign"
+        android:layout_below="@id/taskDetailImageView"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="46dp"
+        android:textSize="13sp"
+        android:textAlignment="textEnd"
+        android:text="1000"/>
+
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description:"
+        android:textSize="24sp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/black"
+        android:layout_below="@id/titleTaskDetailTextView"
+        android:layout_marginEnd="46dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="46dp"/>
+
+    <TextView
+        android:id="@+id/textViewDescTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewDescription"
+        android:maxLines="14"
+        android:layout_marginStart="46dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginTop="5dp"
+        android:textSize="18sp"
+        android:text="@string/description_example"/>
+
+</RelativeLayout>
+</ScrollView>
