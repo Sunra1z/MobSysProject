@@ -11,4 +11,5 @@ Separate recyclables from trash: Check your local guidelines for proper sorting 
     <string name="metal_guidance">Recycle: Rinse to remove food\nresidue, flatten cans if possible\nto save space.\n\nReuse: Use metal containers\nfor storage, and repurpose\nsmall metal items in DIY\nprojects.</string>
     <string name="paper_what">Newspapers, magazines, office paper,\n cardboard, paper packaging,\n books (without plastic covers),\nenvelopes (without plastic windows.).</string>
     <string name="paper_guidance">Recycle: Ensure paper is free\nfrom food residue or plastic\ncoatings. Tear large pieces into\nsmaller sections for easier\nprocessing.\n\nReuse: Use both sides of paper\nbefore recycling, repurpose old\nnewspapers for cleaning\nwindows or packing fragile\nitems.</string>
+    <string name="description_example">Hallo ich bin description\nlol\nlol\nlol\nlol\nlol\nlol\nlol\nlol\nlol\nlol\nlol\nlol\nlol</string>
 </resources>
