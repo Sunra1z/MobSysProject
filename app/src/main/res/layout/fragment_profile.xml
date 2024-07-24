@@ -70,45 +70,31 @@
         android:id="@+id/scrollViewProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCountry">
 
 
-        <Button
-            android:id="@+id/logout"
-            android:layout_width="125dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="160dp"
-            android:layout_marginEnd="160dp"
-            android:layout_marginBottom="30dp"
-            android:elevation="10dp"
-            android:maxLines="1"
-            android:text="Logout"
-            android:textAlignment="center"
-            android:textSize="10sp"
-            android:visibility="visible" />
-
         <androidx.cardview.widget.CardView
             android:id="@+id/pointsCardViewShadow"
-            android:layout_below="@id/logout"
             android:layout_width="match_parent"
-            android:backgroundTint="@color/salad"
             android:layout_height="125dp"
+            android:layout_below="@id/logout"
             android:layout_marginStart="46dp"
             android:layout_marginEnd="46dp"
             android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/salad"
             app:cardCornerRadius="30dp" />
 
 
         <androidx.cardview.widget.CardView
             android:id="@+id/pointsCardView"
-            android:layout_below="@id/logout"
             android:layout_width="match_parent"
-            android:layout_marginTop="2dp"
             android:layout_height="120dp"
             android:layout_marginStart="48dp"
+            android:layout_marginTop="2dp"
             android:layout_marginEnd="48dp"
             android:elevation="10dp"
             app:cardCornerRadius="30dp">
@@ -117,39 +103,51 @@
                 android:id="@+id/pointsText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Points:"
+                android:layout_gravity="start|center_vertical"
                 android:layout_marginStart="20dp"
-                android:textColor="@color/darkGreen"
-                android:textSize="32sp"
                 android:fontFamily="sans-serif-black"
                 android:gravity="center"
-                android:layout_gravity="start|center_vertical" />
+                android:text="Points:"
+                android:textColor="@color/darkGreen"
+                android:textSize="32sp" />
+
             <TextView
                 android:id="@+id/PointsScoreProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
-                android:text="69420"
-                android:textColor="@color/darkGreen"
-                android:fontFamily="sans-serif-medium"
-                android:layout_marginTop="2dp"
-                android:textAlignment="textStart"
                 android:layout_gravity="start|center_vertical"
-                android:layout_marginStart="130dp"/>
+                android:layout_marginStart="130dp"
+                android:layout_marginTop="2dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="69420"
+                android:textAlignment="textStart"
+                android:textColor="@color/darkGreen"
+                android:textSize="24sp" />
 
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|center_vertical"
-                android:src="@drawable/coins"/>
-
+                android:src="@drawable/coins" />
 
 
         </androidx.cardview.widget.CardView>
 
 
-
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="125dp"
+        android:layout_height="35dp"
+        android:elevation="10dp"
+        android:maxLines="1"
+        android:text="Logout"
+        android:textAlignment="center"
+        android:textSize="10sp"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="613dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
