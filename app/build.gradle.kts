@@ -80,4 +80,7 @@ dependencies {
     // image set library
     implementation ("com.github.bumptech.glide:glide:4.16.0")
 
+    // google maps
+    implementation ("com.google.maps.android:android-maps-utils:3.8.0")
+
 }

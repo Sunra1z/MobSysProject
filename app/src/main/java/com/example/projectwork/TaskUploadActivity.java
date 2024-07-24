@@ -68,7 +68,7 @@ public class TaskUploadActivity extends AppCompatActivity {
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent data = result.getData();
                             uri = data.getData();
-                            uploadImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                            uploadImage.setScaleType(ImageView.ScaleType.FIT_XY);
                             uploadImage.setBackgroundResource(R.drawable.green_border);
                             uploadImage.setImageURI(uri);
                         } else {
@@ -145,35 +145,35 @@ public class TaskUploadActivity extends AppCompatActivity {
         // Get the number of tasks the user has already created
         DatabaseReference userTasksRef = FirebaseDatabase.getInstance().getReference("Tasks").child(userId);
         userTasksRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                           long taskNumber = dataSnapshot.getChildrenCount();
-                            // Unique task id combining user id and task number
-                            String taskId = userId + "_" + (taskNumber + 1);
-                            DatabaseReference userTasksRef = FirebaseDatabase.getInstance().getReference("Tasks").child(userId).child(taskId);
-                           userTasksRef.setValue(taskDataClass)
-                                   .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                       @Override
-                                       public void onComplete(@NonNull Task<Void> task) {
-                                           if (task.isSuccessful()){
-                                               Toast.makeText(TaskUploadActivity.this, "Saved successfully", Toast.LENGTH_SHORT).show();
-                                               finish();
-                                           }
-                                       }
-                                   })
-                                   .addOnFailureListener(new OnFailureListener() {
-                                       @Override
-                                       public void onFailure(@NonNull Exception e) {
-                                           Toast.makeText(TaskUploadActivity.this, "Something went wrong, please try again", Toast.LENGTH_SHORT).show();
-                                           Log.d("DB ERROR", e.getMessage().toString());
-                                       }
-                                   });
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        // Handle error
-                        Log.e("Database", "ERROR");
-                    }
-                });
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                long taskNumber = dataSnapshot.getChildrenCount();
+                // Unique task id combining user id and task number
+                String taskId = userId + "_" + (taskNumber + 1);
+                DatabaseReference userTasksRef = FirebaseDatabase.getInstance().getReference("Tasks").child(userId).child(taskId);
+                userTasksRef.setValue(taskDataClass)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    Toast.makeText(TaskUploadActivity.this, "Saved successfully", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(TaskUploadActivity.this, "Something went wrong, please try again", Toast.LENGTH_SHORT).show();
+                                Log.d("DB ERROR", e.getMessage().toString());
+                            }
+                        });
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+                Log.e("Database", "ERROR");
+            }
+        });
     }
 }

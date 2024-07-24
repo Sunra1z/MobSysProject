@@ -46,21 +46,19 @@ public class RewardFragment1 extends Fragment {
 
         userRef.get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
-                Object pointsObject = documentSnapshot.get("points");
-
+                String pointsObject = documentSnapshot.getString("points");
                 long points = 0;
-                if (pointsObject instanceof Number) {
-                    points = ((Number) pointsObject).longValue();
-                } else if (pointsObject instanceof String) {
+                if (pointsObject != null) {
                     try {
-                        points = Long.parseLong((String) pointsObject);
+                        points = Long.parseLong(pointsObject);
                     } catch (NumberFormatException e) {
                         // Handle the case where the string is not a valid number
                     }
                 }
-
+                // TODO: newPoints - actual price of an item
                 if (points >= 10) { // Assuming the item costs 10 points
-                    userRef.update("points", points - 10).addOnSuccessListener(aVoid -> {
+                    long newPoints = points - 10;
+                    userRef.update("points", String.valueOf(newPoints)).addOnSuccessListener(aVoid -> {
                         // Navigate back to ShopFragment
                         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.fragmentContainerView, new ShopFragment());
