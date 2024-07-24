@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonBuy"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="15dp"
