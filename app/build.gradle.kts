@@ -37,6 +37,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -82,5 +86,7 @@ dependencies {
 
     // google maps
     implementation ("com.google.maps.android:android-maps-utils:3.8.0")
+
+    implementation ("com.google.android.gms:play-services-location:21.3.0")
 
 }

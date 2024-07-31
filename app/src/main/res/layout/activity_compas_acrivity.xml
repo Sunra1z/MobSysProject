@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+        tools:context=".CompasActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        app:title="Compass"
+        app:titleCentered="true"
+        app:titleTextAppearance="@style/Title"
+        android:id="@+id/toolbar"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginTop="10sp"
+        android:layout_below="@id/toolbar"
+        android:id="@+id/card1"
+        style="@style/Widget.Material3.CardView.Filled"
+        android:outlineSpotShadowColor="?attr/colorPrimary"
+        android:outlineAmbientShadowColor="?attr/colorPrimary"
+        app:cardElevation="10sp"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="401sp"
+            android:src="@drawable/compassmain"
+            android:padding="20sp"
+            android:id="@+id/compassImageView"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginTop="20sp"
+        style="@style/Widget.Material3.CardView.Filled"
+        android:layout_below="@id/card1"
+        android:id="@+id/card2"
+        android:outlineSpotShadowColor="?attr/colorPrimary"
+        android:outlineAmbientShadowColor="?attr/colorPrimary"
+        app:cardElevation="10sp"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10sp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/cityTV"
+                android:text="New York"
+                android:textColor="?attr/colorSurfaceInverse"
+                android:gravity="center_vertical"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/headingTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="040"
+                    android:textColor="#FE3B30"
+                    android:textSize="70sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/directionTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="N"
+                        android:textColor="?attr/colorSurfaceInverse"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/latitudeTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Lat: 37.422"
+                        android:textColor="?attr/colorSurfaceInverse"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/longitudeTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Long: -123.422"
+                        android:textColor="?attr/colorSurfaceInverse"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/trueHeadingTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="50"
+                        android:textColor="?attr/colorSurfaceInverse"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="100sp"
+                android:layout_height="2sp"
+                android:gravity="center_horizontal"
+                android:layout_margin="4sp"
+                tools:ignore="SmallSp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:textStyle="bold"
+                android:textFontWeight="600"
+                android:fontFamily="sans-serif"
+                android:text="Magnetic strength: 10"
+                android:id="@+id/magneticStrengthTV" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif"
+                android:text="Pressure: 1024hpa"
+                android:textFontWeight="600"
+                android:id="@+id/pressureTV" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif"
+                android:text="Altitude: 50 m"
+                android:textFontWeight="600"
+                android:id="@+id/altitudeTV" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

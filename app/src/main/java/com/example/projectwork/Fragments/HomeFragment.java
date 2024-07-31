@@ -1,9 +1,11 @@
 package com.example.projectwork.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectwork.Adapters.homeFragmentRecyclerAdapter;
+import com.example.projectwork.CompasActivity;
 import com.example.projectwork.DataClasses.WasteDisposalItem;
 import com.example.projectwork.R;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -30,6 +33,7 @@ public class HomeFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         ShapeableImageView newsButton = view.findViewById(R.id.imageView6);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        ImageView imageView = view.findViewById(R.id.imageView7);
 
         List<WasteDisposalItem> items = new ArrayList<>();
         items.add(new WasteDisposalItem(R.drawable.img_1, "Paper"));
@@ -71,6 +75,11 @@ public class HomeFragment extends Fragment {
                     .replace(R.id.fragmentContainerView, newsFragment)
                     .addToBackStack(null) // back stack
                     .commit();
+        });
+
+        imageView.setOnClickListener(v -> {
+           Intent intent = new Intent(getActivity(), CompasActivity.class);
+              startActivity(intent);
         });
 
         return view;
