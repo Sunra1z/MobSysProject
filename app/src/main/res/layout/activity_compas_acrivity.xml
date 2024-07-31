@@ -32,7 +32,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="401sp"
-            android:src="@drawable/compassmain"
+            android:src="@drawable/compasmain"
             android:padding="20sp"
             android:id="@+id/compassImageView"/>
 
@@ -80,7 +80,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="040"
-                    android:textColor="#FE3B30"
+                    android:textColor="#556E2C"
                     android:textSize="70sp" />
 
                 <LinearLayout
