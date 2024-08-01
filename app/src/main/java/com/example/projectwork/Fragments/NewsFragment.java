@@ -1,10 +1,12 @@
 package com.example.projectwork.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectwork.Adapters.NewsRecyclerAdapter;
+import com.example.projectwork.CompasActivity;
 import com.example.projectwork.R;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.kwabenaberko.newsapilib.NewsApiClient;
@@ -29,6 +32,7 @@ public class NewsFragment extends Fragment {
     List<Article> articleList = new ArrayList<>();
     NewsRecyclerAdapter adapter;
     LinearProgressIndicator progressIndicator;
+    ImageView compassIcon;
 
     @Nullable
     @Override
@@ -38,9 +42,17 @@ public class NewsFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.news_recycler_view);
         progressIndicator = view.findViewById(R.id.progress_bar);
-
+        compassIcon = view.findViewById(R.id.header_compass);
         setRecyclerView();
         getNews();
+
+        compassIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CompasActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         return view;

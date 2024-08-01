@@ -18,6 +18,7 @@ import com.example.projectwork.DataClasses.TaskDataClass;
 import com.example.projectwork.Fragments.TaskDetailFragment;
 import com.example.projectwork.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -55,6 +56,7 @@ public class TasksRecyclerAdapter extends RecyclerView.Adapter<TasksRecyclerAdap
     public int getItemCount() {
         return tasks.size();
     }
+
 
     class TaskViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView;

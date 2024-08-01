@@ -16,9 +16,10 @@
         android:layout_marginTop="85dp"
         android:layout_marginEnd="140dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@color/salad"
+        app:strokeColor="@color/salad"
+        app:strokeWidth="3dp"
         app:shapeAppearanceOverlay="@style/circleImageView"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/baseline_account_circle_24" />
@@ -49,7 +50,7 @@
         app:layout_constraintBottom_toTopOf="@+id/txtemail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@+id/profile_pic" />
 
     <TextView
@@ -60,17 +61,18 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="177dp"
         android:text="country"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
 
     <RelativeLayout
-        android:id="@+id/scrollViewProfile"
+        android:id="@+id/PointsView"
+        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +83,6 @@
             android:id="@+id/pointsCardViewShadow"
             android:layout_width="match_parent"
             android:layout_height="125dp"
-            android:layout_below="@id/logout"
             android:layout_marginStart="46dp"
             android:layout_marginEnd="46dp"
             android:layout_marginBottom="30dp"
@@ -145,9 +146,10 @@
         android:text="Logout"
         android:textAlignment="center"
         android:textSize="10sp"
-        android:visibility="visible"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="613dp" />
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtCountry" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

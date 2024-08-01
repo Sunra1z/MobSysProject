@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.projectwork.CompasActivity;
 import com.example.projectwork.LoginActivity;
 import com.example.projectwork.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,9 +28,10 @@ public class ProfileFragment extends Fragment {
     Button logout;
     FirebaseAuth auth;
     TextView txtName, txtCountry, pointsProfile;
-    ImageView imgProfile;
+    ImageView imgProfile, compassIcon;
 
     ProgressBar progressBar;
+    RelativeLayout pointCard;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,9 @@ public class ProfileFragment extends Fragment {
         txtCountry = view.findViewById(R.id.txtCountry);
         progressBar = view.findViewById(R.id.progressBar);
         imgProfile = view.findViewById(R.id.profile_pic);
+        compassIcon = view.findViewById(R.id.header_compass);
         pointsProfile = view.findViewById(R.id.PointsScoreProfile);
+        pointCard = view.findViewById(R.id.PointsView);
 
         //logout button
         logout.setOnClickListener(v -> {
@@ -95,6 +100,7 @@ public class ProfileFragment extends Fragment {
             txtName.setVisibility(View.VISIBLE);
             txtCountry.setVisibility(View.VISIBLE);
             logout.setVisibility(View.VISIBLE);
+            pointCard.setVisibility(View.VISIBLE);
 
 
         }).addOnFailureListener(e -> {
@@ -103,6 +109,13 @@ public class ProfileFragment extends Fragment {
             txtCountry.setText("");
             pointsProfile.setText("");
             progressBar.setVisibility(View.GONE);
+        });
+        compassIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CompasActivity.class);
+                startActivity(intent);
+            }
         });
     }
 }

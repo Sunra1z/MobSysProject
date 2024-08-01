@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +33,23 @@ public class HomeFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         ShapeableImageView newsButton = view.findViewById(R.id.imageView6);
+        SearchView searchView = view.findViewById(R.id.searchView);
+        ImageView compassIcon = view.findViewById(R.id.header_compass);
+
+        searchView.setOnClickListener(v -> {
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new SearchFragment()).addToBackStack(null).commit();
+        });
+
+
+        compassIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CompasActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         ImageView imageView = view.findViewById(R.id.imageView7);
 
@@ -77,10 +95,6 @@ public class HomeFragment extends Fragment {
                     .commit();
         });
 
-        imageView.setOnClickListener(v -> {
-           Intent intent = new Intent(getActivity(), CompasActivity.class);
-              startActivity(intent);
-        });
 
         return view;
     }

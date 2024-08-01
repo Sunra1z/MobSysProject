@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectwork.Adapters.TasksRecyclerAdapter;
+import com.example.projectwork.CompasActivity;
 import com.example.projectwork.DataClasses.TaskDataClass;
 import com.example.projectwork.R;
 import com.example.projectwork.TaskUploadActivity;
@@ -39,6 +41,7 @@ public class TasksFragment extends Fragment {
     ValueEventListener eventListener;
 
     ProgressBar progressBar;
+    ImageView compassIcon;
 
     @Nullable
     @Override
@@ -48,6 +51,7 @@ public class TasksFragment extends Fragment {
         createTask = view.findViewById(R.id.upload_task_button);
         recyclerView = view.findViewById(R.id.tasks_recyclerView);
         progressBar = view.findViewById(R.id.progress_bar_tasks);
+        compassIcon = view.findViewById(R.id.header_compass);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
@@ -88,6 +92,14 @@ public class TasksFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), TaskUploadActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        compassIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CompasActivity.class);
                 startActivity(intent);
             }
         });

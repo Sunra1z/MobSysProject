@@ -29,6 +29,7 @@
         android:textSize="30sp"
         android:layout_below="@id/include"/>
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tasks_recyclerView"
         android:layout_width="match_parent"
